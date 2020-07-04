@@ -4,7 +4,8 @@
   "description": "Indoor in Arduino Dashboard",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serial": "node serial.js"
   },
   "repository": {
     "type": "git",
