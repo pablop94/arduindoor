@@ -1,0 +1,8 @@
+{
+	"MQTT_CONNECTION": "mqtt://localhost:1883",
+	"SERIAL_PORT": "/dev/ttyUSB0",
+	"LOG_CONFIG": {
+        "logFilePath": "logs/serial.log",
+        "timestampFormat": "YYYY-MM-DD HH:mm:ss"
+    }
+}

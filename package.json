@@ -1,0 +1,29 @@
+{
+  "name": "arduindoor",
+  "version": "1.0.0",
+  "description": "Indoor in Arduino Dashboard",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/pablop94/arduindoor.git"
+  },
+  "keywords": [
+    "arduino",
+    "indoor"
+  ],
+  "author": "florblue,pablop94",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pablop94/arduindoor/issues"
+  },
+  "homepage": "https://github.com/pablop94/arduindoor#readme",
+  "dependencies": {
+    "mqtt": "^4.1.0",
+    "serialport": "^9.0.0",
+    "simple-node-logger": "^18.12.24",
+    "socket.io": "^2.3.0"
+  }
+}
