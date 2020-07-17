@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A web interface for MQTT over Websockets">
+    <meta name="author" content="Fabian Affolter">
+
+    <title>Arduindoor test</title>
+
+    <!-- MQTT Websocket -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.js"></script>
+    <script type="text/javascript">
+        var host = 'localhost';
+        var port = 9001;
+        var topic = '#';
+        var useTLS = false;
+        var cleansession = true;
+        var mqtt;
+        var reconnectTimeout = 2000;
+
+        function MQTTconnect() {
+	        if (typeof path == "undefined") {
+		        path = '/';
+	        }
+	        mqtt = new Paho.MQTT.Client(host, port, path, "arduindoor" + parseInt(Math.random() * 100, 10)
+	    );
+            var options = {
+                timeout: 3,
+                useSSL: useTLS,
+                cleanSession: cleansession,
+                onSuccess: onConnect,
+                onFailure: function (message) {
+                    setTimeout(MQTTconnect, reconnectTimeout);
+                }
+            };
+
+            mqtt.onConnectionLost = onConnectionLost;
+            mqtt.onMessageArrived = onMessageArrived;
+            console.log("Host: "+ host + ", Port: " + port + ", Path: " + path + " TLS: " + useTLS);
+            mqtt.connect(options);
+        };
+
+        function onConnect() {
+            document.getElementById("status").innerText = 'Connected to ' + host + ':' + port + path
+            mqtt.subscribe(topic, {qos: 0});
+        };
+
+        function onConnectionLost(response) {
+            setTimeout(MQTTconnect, reconnectTimeout);
+        };
+
+        function onMessageArrived(message) {
+            var topic = message.destinationName;
+            var payload = message.payloadString;
+            console.log("Topic: " + topic + ", Message payload: " + payload);
+            var area = message[1];
+            var state = message[2];
+            let livingTemp = []
+            var timestamp = Math.round((new Date()).getTime() / 1000);
+            document.getElementById("mqtt-message").innerText = `${topic} is now working`
+        };
+        window.onload = function() {
+            MQTTconnect();
+        }
+    </script>
+
+  </head>
+
+  <body style="margin-top: 30px;">
+    <div id="mqtt-message">
+
+    </div>
+    <div id="status">
+
+    </div>
+  </body>
+</html>

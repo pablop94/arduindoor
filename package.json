@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serial": "node serial.js"
+    "serial": "node serial.js",
+    "notifications": "node notifications.js"
   },
   "repository": {
     "type": "git",
