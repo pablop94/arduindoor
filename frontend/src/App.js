@@ -2,6 +2,29 @@ import React from 'react';
 import './App.css';
 import TemperatureGraph from './components/TemperatureChart';
 import Temperature from './components/Temperature';
+import { useCubeQuery } from '@cubejs-client/react';
+
+const chart = ({ query, cubejsApi }) => {
+  const {
+    resultSet,
+    error,
+    isLoading
+  } = useCubeQuery(query, { subscribe: true, cubejsApi });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <pre>{error.toString()}</pre>;
+  }
+
+  if (!resultSet) {
+    return null;
+  }
+
+  return resultSet;
+};
 
 function App() {
 
@@ -277,6 +300,9 @@ function App() {
       ]
     }
   ]
+
+
+
 
   return (
     <div className="App">
