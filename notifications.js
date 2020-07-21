@@ -12,6 +12,8 @@ let sent = false
 client.on('connect', () => {
   log.info(`MQTT client connected at ${MQTT_CONNECTION}.`)
   client.subscribe('temperatura', function (err, grants) {
+    if (err)
+      log.error(`Error when suscribing to notifications ${err}`)
     grants.forEach(grant => log.info(`Successfully suscribed notifications to topic: ${grant.topic}`))
   })
   client.on('message', function (topic, message) {
@@ -19,7 +21,7 @@ client.on('connect', () => {
     if (!sent) {
       sent = true
       axios.get(send_text).then(response => {
-        log.info(`Message sent: ${message.toString()}`)
+        log.info(`Message sent: ${JSON.parse(message.toString())}`)
       }).catch((err) => {
         log.error(err)
       })

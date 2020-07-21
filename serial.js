@@ -3,8 +3,8 @@ const Readline = SerialPort.parsers.Readline
 const mqtt = require('mqtt')
 const get_logger = require('./logger')
 
-const {  MQTT_CONNECTION, SERIAL_PORT  } = require('./configuration')
-const log = get_logger({category: "SERIAL BRIDGE"})
+const { MQTT_CONNECTION, SERIAL_PORT } = require('./configuration')
+const log = get_logger({ category: "SERIAL BRIDGE" })
 
 log.info(`Starting serial port bridge.`)
 
@@ -29,7 +29,9 @@ checkAvailable(SERIAL_PORT).then(status => {
       log.info(`MQTT client connected at ${MQTT_CONNECTION}.`)
 
       parser.on('data', data => {
-        client.publish("temperatura", data)
+        //formatear los datos: temperatura,30
+        //formatear los datos: humedad,25
+        client.publish(...data.split(','))
       })
     })
   }
