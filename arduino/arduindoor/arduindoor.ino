@@ -14,14 +14,14 @@ SoftwareSerial Serial1(10, 11);
 
 DHT dht(DHTPIN, DHTTYPE);
 
-char ssid[] = "Coope 2.4GHz";
-char pass[] = "GaiaC00p";
+char ssid[] = "ssid";
+char pass[] = "pswd";
 
 
 //Contador para el envio de datos
 unsigned long lastSend;
 //Nombre o IP del servidor mosquitto
-char server[50] = "192.168.1.12";
+char server[50] = "ipMosquito";
 //Inicializamos el objeto de cliente esp
 WiFiEspClient espClient;
 
@@ -152,7 +152,6 @@ void reconnectClient() {
         Serial.println(server);
         //Creamos una nueva cadena de conexión para el servidor
         //e intentamos realizar la conexión nueva
-        //si requiere usuario y contraseña la enviamos connect(clientId, username, password)
         String clientId = "ESP8266Client-" + String(random(0xffff), HEX);
         if(client.connect(clientId.c_str())) {
             Serial.println("[DONE]");
