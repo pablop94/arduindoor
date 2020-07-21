@@ -32,7 +32,6 @@
     "mongoose": "^5.9.25",
     "mqtt": "^4.1.0",
     "serialport": "^9.0.0",
-    "simple-node-logger": "^18.12.24",
-    "socket.io": "^2.3.0"
+    "simple-node-logger": "^18.12.24"
   }
 }
