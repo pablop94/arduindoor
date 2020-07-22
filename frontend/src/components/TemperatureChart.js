@@ -32,7 +32,7 @@ const TemperatureGraph = ({ list, topic }) => (
             legendOffset: -80,
             legendPosition: 'middle'
         }}
-        colors={{ scheme: 'pink_yellowGreen' }}
+        colors={{ scheme: 'accent' }}
         pointSize={10}
         pointColor={{ theme: 'background' }}
         pointBorderWidth={2}

@@ -44,11 +44,7 @@ function App() {
       <div className="App-header">
         <h1>Arduindoor</h1>
       </div>
-      <div className="data-container">
-        <div className="data-card">
           <Temperature />
-        </div>
-      </div>
       { isLoading 
         ?  <div>Loading ...</div>
         : (
@@ -61,7 +57,13 @@ function App() {
             </div>
           </div>
           )
-      } 
+      }
+      <div className="App-footer">
+        <h5>Arduindoor</h5>
+        <a href='https://github.com/pablop94/arduindoor'>
+        <h6>Github</h6>
+        </a>
+      </div> 
 		</div>
   );
 }

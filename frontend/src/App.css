@@ -26,6 +26,17 @@
   color: white;
 }
 
+.App-footer {
+  background-color: #585a59;
+  max-height: 10vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -35,9 +46,6 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-}
-.data-card {
-  
 }
 
 .chart {
