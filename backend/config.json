@@ -1,8 +1,10 @@
 {
-	"MQTT_CONNECTION": "mqtt://localhost:1883",
-	"SERIAL_PORT": "/dev/ttyUSB0",
-	"LOG_CONFIG": {
-        "logFilePath": "logs/arduindoor.log",
-        "timestampFormat": "YYYY-MM-DD HH:mm:ss"
-    }
+  "MQTT_CONNECTION": "mqtt://localhost:1883",
+  "SERIAL_PORT": "/dev/ttyUSB0",
+  "LOG_CONFIG": {
+    "logFilePath": "logs/arduindoor.log",
+    "timestampFormat": "YYYY-MM-DD HH:mm:ss"
+  },
+  "TEMPERATURE_LIMIT": 28,
+  "HUMIDITY_LIMIT": 15
 }
