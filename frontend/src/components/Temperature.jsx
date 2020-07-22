@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import WavesTwoToneIcon from '@material-ui/icons/WavesTwoTone';
 import OpacityTwoToneIcon from '@material-ui/icons/OpacityTwoTone';
+import {getHumidityAdvice, getTemperatureAdvice } from '../advices';
 
 const useStyles = makeStyles({
   root: {
@@ -45,7 +46,7 @@ export default function Temperature(props) {
 
   // Sets default React state 
   const [humidity, setHumidity] = useState(<Fragment><em>nothing heard</em></Fragment>);
-  const [temerature, setTemperature] = useState(<Fragment><em>nothing heard</em></Fragment>);
+  const [temperature, setTemperature] = useState(<Fragment><em>nothing heard</em></Fragment>);
 
   useEffect(() => {
     // temperatura is a the MQTT topic
@@ -73,10 +74,10 @@ export default function Temperature(props) {
           </Typography>
           <WavesTwoToneIcon />
           <Typography className={classes.pos} color="textSecondary">
-            {temerature}
+            {temperature + '°C'}
           </Typography>
           <Typography variant="body2" component="p">
-            Temperatura óptima
+            {getTemperatureAdvice(parseInt(temperature))}
             <br />
           </Typography>
         </CardContent>
@@ -88,10 +89,10 @@ export default function Temperature(props) {
           </Typography>
           <OpacityTwoToneIcon />
           <Typography className={classes.pos} color="textSecondary">
-            {humidity}
+            {humidity + '%'}
           </Typography>
           <Typography variant="body2" component="p">
-            Se recomienda regar pronto
+            {getHumidityAdvice(parseInt(humidity))}
             <br />
           </Typography>
         </CardContent>
