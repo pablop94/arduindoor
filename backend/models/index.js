@@ -6,6 +6,7 @@ mongoose.Promise = global.Promise;
 const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
-db.tutorials = require("./temperature.model.js")(mongoose);
+db.temperature = require("./temperature.model.js")(mongoose);
 
 module.exports = db;
+    
