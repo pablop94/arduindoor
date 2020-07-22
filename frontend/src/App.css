@@ -37,8 +37,13 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.App-loader {
+  height: 25vh;
+  margin: 130px;
+  align-items: center;
+  justify-content: center;
+  color: #7dc67c;
+
 }
 
 .data-container {
@@ -52,6 +57,19 @@
   height: 50vh;
   width: 90vw;
 
+}
+
+a:link {
+  color: #7dc67c;
+  text-decoration: none;
+}
+a:visited {
+  color: #7dc67c;
+  text-decoration: none;
+}
+a:hover {
+  color: hotpink;
+  text-decoration: none;
 }
 
 @keyframes App-logo-spin {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import { LinearProgress } from '@material-ui/core';
 import TemperatureGraph from './components/TemperatureChart';
 import Temperature from './components/Temperature';
 import axios from 'axios';
@@ -11,15 +12,17 @@ function App() {
   const [data, setData] = useState([{}]);
 
   useEffect(() => {
+   
     const fetchTemp = async () => {
       setIsLoading(true);
       const response = await axios.get(apiUrl);
-      
-      console.log('a ver', response.data);
+      console.log('kk')
       setData(response.data);
       setIsLoading(false);
     }
+    
     fetchTemp();
+    
   }, []);
 
   const getTemperaturesList = (topic) => {
@@ -40,31 +43,35 @@ function App() {
   
 
   return (
-    <div className="App">
-      <div className="App-header">
-        <h1>Arduindoor</h1>
-      </div>
-          <Temperature />
-      { isLoading 
-        ?  <div>Loading ...</div>
-        : (
-          <div>
-            <div className="chart">
-              <TemperatureGraph list={getTemperaturesList('temperatura')} topic={'temperatura'} />
-            </div>
-            <div className="chart">
-              <TemperatureGraph list={getTemperaturesList('humedad')} topic={'humedad'} />
-            </div>
+        <div className="App">
+          <div className="App-header">
+            <h1>Arduindoor</h1>
           </div>
-          )
-      }
-      <div className="App-footer">
-        <h5>Arduindoor</h5>
-        <a href='https://github.com/pablop94/arduindoor'>
-        <h6>Github</h6>
-        </a>
-      </div> 
-		</div>
+              <Temperature />
+          { isLoading 
+            ?  (<div className="App-loader">
+                  <LinearProgress color='secondary' />
+                  <h5>Cargando...</h5>
+                </div>
+            )
+            : (
+              <div>
+                <div className="chart">
+                  <TemperatureGraph list={getTemperaturesList('temperatura')} topic={'temperatura'} />
+                </div>
+                <div className="chart">
+                  <TemperatureGraph list={getTemperaturesList('humedad')} topic={'humedad'} />
+                </div>
+              </div>
+              )
+          }
+          <div className="App-footer">
+            <h5>Arduindoor</h5>
+            <a className="App-Link" href='https://github.com/pablop94/arduindoor'>
+            <h6>Github</h6>
+            </a>
+          </div> 
+        </div>
   );
 }
 

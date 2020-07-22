@@ -33,6 +33,10 @@ const useStyles = makeStyles({
     fontWeight: '500',
     fontSize: '30px'
   },
+  advice: {
+    fontWeight: '100',
+    fontSize: '18px'
+  },
   dataContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -56,8 +60,8 @@ export default function Temperature(props) {
   const client  = mqtt.connect('mqtt://0.0.0.0:9001', options);
 
   // Sets default React state 
-  const [humidity, setHumidity] = useState(<Fragment><em>nothing heard</em></Fragment>);
-  const [temperature, setTemperature] = useState(<Fragment><em>nothing heard</em></Fragment>);
+  const [humidity, setHumidity] = useState();
+  const [temperature, setTemperature] = useState();
 
   useEffect(() => {
     // temperatura is a the MQTT topic
@@ -89,13 +93,19 @@ export default function Temperature(props) {
             Temperatura
           </Typography>
           <WavesTwoToneIcon />
-          <Typography className={classes.pos} color="textSecondary">
-            {temperature + '°C'}
-          </Typography>
-          <Typography variant="body2" component="p">
-            {getTemperatureAdvice(parseInt(temperature))}
-            <br />
-          </Typography>
+          { temperature ? (
+            <div>
+              <Typography className={classes.pos} color="textSecondary">
+                {temperature ? temperature + '°C' : 'sin registro'}
+              </Typography>
+              <Typography variant="body2" component="p">
+                {getTemperatureAdvice(parseInt(temperature))}
+                <br />
+              </Typography>
+            </div>
+            )
+            :  <h5 className={classes.advice}>No hay registro</h5>
+          }
         </CardContent>
       </Card>
       <CardMedia
@@ -110,13 +120,19 @@ export default function Temperature(props) {
             Humedad
           </Typography>
           <OpacityTwoToneIcon />
-          <Typography className={classes.pos} color="textSecondary">
-            {humidity + '%'}
-          </Typography>
-          <Typography variant="body2" component="p">
-            {getHumidityAdvice(parseInt(humidity))}
-            <br />
-          </Typography>
+          { humidity ? (
+            <div>
+              <Typography className={classes.pos} color="textSecondary">
+                {humidity + '%'}
+              </Typography>
+              <Typography variant="body2" component="p">
+                {getHumidityAdvice(parseInt(humidity))}
+                <br />
+              </Typography>
+            </div>
+          )
+            : <h5 className={classes.advice}>No hay registro</h5>
+          }
         </CardContent>
       </Card>
     </Grid>

@@ -1,14 +1,14 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-//const cors = require("cors");
+const cors = require("cors");
 const app = express();
 var mqttHandler = require('./mqtt_handler');
 
-// var corsOptions = {
-//   origin: "http://localhost:3000"
-// };
+var corsOptions = {
+  origin: "http://localhost:3001"
+};
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());

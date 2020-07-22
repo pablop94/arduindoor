@@ -39,15 +39,11 @@ exports.create = (req, res) => {
 
 // Retrieve all Temperatures from the database.
 exports.findAll = (req, res) => {
-    // const maxDateTime = req.query.maxDateTime;
-    // const topic = req.query.topic;
-    // var condition = maxDateTime ? { dateTime: { $gte: maxDateTime }, topic: { $regex: new RegExp(topic), $options: "i" } } : { topic: { $regex: new RegExp(topic), $options: "i" }};
-    // console.log(condition)
-    // console.log(req)
-    Temperature.find()
+    const topic = req.query.topic;
+    const condition =  topic ? { topic: topic } : {};
+    Temperature.find(condition)
       .then(data => {
         res.send(data);
-        console.log('res', res)
       })
       .catch(err => {
         res.status(500).send({
