@@ -5,7 +5,7 @@ const Temperature = db.temperature;
 exports.create = (req, res) => {
     // Validate request
     if (!req.body.topic) {
-      res.status(400).send({ message: "Content can not be empty!" });
+      res.status(400).send({ message: "Content has to be completed!" });
       return;
     }
   
@@ -28,6 +28,12 @@ exports.create = (req, res) => {
             err.message || "Some error occurred while creating the Temperature."
         });
       });
+  };
+
+  exports.logTemperature = (temperature) => {
+    const newTemperature = new Temperature(temperature)
+    newTemperature
+      .save(newTemperature)    
   };
   
 
