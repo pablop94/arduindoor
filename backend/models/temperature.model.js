@@ -1,19 +1,26 @@
 module.exports = mongoose => {
-var schema = mongoose.Schema(
+    
+var Schema = mongoose.Schema;
+
+var temperatureSchema =  new Schema(
     {
     topic: String,
     dateTime: String,
-    value: Boolean
+    value: String
     },
-    { timestamps: true }
+    { timestamps: true },
+    {
+      collection: 'temperatures'
+    }
 );
 
-schema.method("toJSON", function() {
+temperatureSchema.method("toJSON", function() {
     const { __v, _id, ...object } = this.toObject();
     object.id = _id;
     return object;
 });
 
-const Temperature = mongoose.model("temperature", schema);
+const Temperature = mongoose.model("Temperature", temperatureSchema);
+
 return Temperature;
 };

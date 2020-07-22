@@ -4,8 +4,8 @@ const Temperature = db.temperature;
 // Create and Save a new Temperature    
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.title) {
-      res.status(400).send({ message: "Content can not be empty!" });
+    if (!req.body.topic) {
+      res.status(400).send({ message: "Content has to be completed!" });
       return;
     }
   
@@ -29,17 +29,25 @@ exports.create = (req, res) => {
         });
       });
   };
+
+  exports.logTemperature = (temperature) => {
+    const newTemperature = new Temperature(temperature)
+    newTemperature
+      .save(newTemperature)    
+  };
   
 
 // Retrieve all Temperatures from the database.
 exports.findAll = (req, res) => {
-    const maxDateTime = req.query.maxDateTime;
-    const topic = req.query.topic;
-    var condition = maxDateTime ? { dateTime: { $gte: maxDateTime }, topic: { $regex: new RegExp(topic), $options: "i" } } : { topic: { $regex: new RegExp(topic), $options: "i" }};
-  
-    Temperature.find(condition)
+    // const maxDateTime = req.query.maxDateTime;
+    // const topic = req.query.topic;
+    // var condition = maxDateTime ? { dateTime: { $gte: maxDateTime }, topic: { $regex: new RegExp(topic), $options: "i" } } : { topic: { $regex: new RegExp(topic), $options: "i" }};
+    // console.log(condition)
+    // console.log(req)
+    Temperature.find()
       .then(data => {
         res.send(data);
+        console.log('res', res)
       })
       .catch(err => {
         res.status(500).send({

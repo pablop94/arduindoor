@@ -25,4 +25,5 @@ module.exports = app => {
     router.delete("/", temperatures.deleteAll);
   
     app.use('/api/temperatures', router);
+
   };
