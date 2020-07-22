@@ -1,9 +1,10 @@
 import React, { useState, Fragment } from 'react';
 import { ResponsiveLine } from '@nivo/line';
 
-const TemperatureGraph = ({ data /* see data tab */ }) => (
+const TemperatureGraph = ({ list }) => (
+    list ?  (
     <ResponsiveLine
-        data={data}
+        data={list}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: 'point' }}
         yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
@@ -14,7 +15,7 @@ const TemperatureGraph = ({ data /* see data tab */ }) => (
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'transportation',
+            legend: 'temperatura',
             legendOffset: 36,
             legendPosition: 'middle'
         }}
@@ -23,7 +24,7 @@ const TemperatureGraph = ({ data /* see data tab */ }) => (
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'count',
+            legend: 'hora',
             legendOffset: -40,
             legendPosition: 'middle'
         }}
@@ -62,6 +63,7 @@ const TemperatureGraph = ({ data /* see data tab */ }) => (
             }
         ]}
     />
+    ) : <p>No hay datos para mostrar</p>
 )
 
 export default TemperatureGraph;
