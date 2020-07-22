@@ -1,33 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect }from 'react';
 import './App.css';
 import TemperatureGraph from './components/TemperatureChart';
 import Temperature from './components/Temperature';
-import { useCubeQuery } from '@cubejs-client/react';
 
-const chart = ({ query, cubejsApi }) => {
-  const {
-    resultSet,
-    error,
-    isLoading
-  } = useCubeQuery(query, { subscribe: true, cubejsApi });
+const useFetch = (url) => {
+  const [data, setData] = useState(null);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  useEffect(() => {
+    fetch(url).then(async res => {
+      if (res.status !== 200) {
+        setData('uh oh error!');
+      }
+      const data = await res.json();
+      setData(data);
+    });
+  }, [setData, url]);
 
-  if (error) {
-    return <pre>{error.toString()}</pre>;
-  }
-
-  if (!resultSet) {
-    return null;
-  }
-
-  return resultSet;
-};
+  return [data];
+}
 
 function App() {
-
+  const [data] = useFetch('/api/temperatures');
+  console.log(data)
   const datita = [
     {
       "id": "japan",
@@ -300,6 +294,7 @@ function App() {
       ]
     }
   ]
+
 
 
 
