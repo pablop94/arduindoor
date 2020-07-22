@@ -74,7 +74,7 @@ export default function Temperature(props) {
           </Typography>
           <WavesTwoToneIcon />
           <Typography className={classes.pos} color="textSecondary">
-            {temperature}
+            {temperature + '°C'}
           </Typography>
           <Typography variant="body2" component="p">
             {getTemperatureAdvice(parseInt(temperature))}
@@ -89,7 +89,7 @@ export default function Temperature(props) {
           </Typography>
           <OpacityTwoToneIcon />
           <Typography className={classes.pos} color="textSecondary">
-            {humidity}
+            {humidity + '%'}
           </Typography>
           <Typography variant="body2" component="p">
             {getHumidityAdvice(parseInt(humidity))}

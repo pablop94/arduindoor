@@ -1,34 +1,38 @@
 import React, { useState, Fragment } from 'react';
 import { ResponsiveLine } from '@nivo/line';
 
-const TemperatureGraph = ({ list }) => (
+const TemperatureGraph = ({ list, topic }) => (
     list ?  (
     <ResponsiveLine
         data={list}
-        margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-        xScale={{ type: 'point' }}
-        yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
+        curve='basis'
+        lineWidth= {4}
+        enableArea={true}
+        areaBlendMode="overlay"
+        margin={{ top: 50, right: 120, bottom: 100, left: 210 }}
+        xScale={{ type: 'linear' }}
+        yScale={{ type: 'point', min: 'auto', max: 'auto', stacked: true, reverse: false }}
         axisTop={null}
         axisRight={null}
         axisBottom={{
             orient: 'bottom',
-            tickSize: 5,
+            tickSize: 7,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'temperatura',
-            legendOffset: 36,
+            legend: 'Hora',
+            legendOffset: 60,
             legendPosition: 'middle'
         }}
         axisLeft={{
             orient: 'left',
-            tickSize: 5,
+            tickSize: 7,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'hora',
-            legendOffset: -40,
+            legend: topic,
+            legendOffset: -80,
             legendPosition: 'middle'
         }}
-        colors={{ scheme: 'nivo' }}
+        colors={{ scheme: 'pink_yellowGreen' }}
         pointSize={10}
         pointColor={{ theme: 'background' }}
         pointBorderWidth={2}

@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   background-color: #e3e8e4;
+  height: 100%;
 }
 
 .App-logo {
@@ -40,7 +41,9 @@
 }
 
 .chart {
-  height: 300px;
+  height: 50vh;
+  width: 90vw;
+
 }
 
 @keyframes App-logo-spin {
