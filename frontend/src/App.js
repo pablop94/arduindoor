@@ -4,6 +4,11 @@ import { LinearProgress } from '@material-ui/core';
 import TemperatureGraph from './components/TemperatureChart';
 import Temperature from './components/Temperature';
 import axios from 'axios';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 function App() {
   const humimdity_topic = 'humedad';
@@ -12,22 +17,30 @@ function App() {
   const apiUrl = "http://localhost:3000/api/temperatures"
 
   const [isLoading, setIsLoading] = useState(false);
-  //const [data, setData] = useState([{}]);
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
   const [temperatureData, setTemperatureData] = useState([{}]);
   const [humidityData, setHumidityData] = useState([{}]);
   
+  const fetchTemp = async (topic, date) => {
+    setIsLoading(true);
+    const response = await axios.get(apiUrl, {
+      params: {
+        topic: topic,
+        date: date
+      }
+    });
+    topic === humimdity_topic ? setHumidityData(response.data) : setTemperatureData(response.data);
+    setIsLoading(false);
+  }
+
+  const handleDateChange = (date) => {
+    console.log('date', date)
+    setSelectedDate(date);
+    fetchTemp(humimdity_topic, date);
+    fetchTemp(temperature_topic, date);
+  };
+
   useEffect(() => {
-   
-    const fetchTemp = async (topic) => {
-      setIsLoading(true);
-      const response = await axios.get(apiUrl, {
-        params: {
-          topic: topic
-        }
-      });
-      topic === humimdity_topic ? setHumidityData(response.data) : setTemperatureData(response.data);
-      setIsLoading(false);
-    }
     fetchTemp(humimdity_topic);
     fetchTemp(temperature_topic);
   }, []);
@@ -64,12 +77,27 @@ function App() {
             )
             : (
               <div>
+                 <MuiPickersUtilsProvider utils={DateFnsUtils}>      
+                  <KeyboardDatePicker
+                    disableToolbar
+                    variant="inline"
+                    format="MM/dd/yyyy"
+                    margin="normal"
+                    id="date-picker-inline"
+                    label="Date picker inline"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    KeyboardButtonProps={{
+                      'aria-label': 'change date',
+                    }}
+                  />
                 <div className="chart">
                   <TemperatureGraph list={getTemperaturesList(temperature_topic)} topic={temperature_topic} />
                 </div>
                 <div className="chart">
                   <TemperatureGraph list={getTemperaturesList(humimdity_topic)} topic={humimdity_topic} />
                 </div>
+                </MuiPickersUtilsProvider>
               </div>
               )
           }
