@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -50,7 +50,7 @@ const useStyles = makeStyles({
 
 const mqtt = require('mqtt');
 
-export default function Temperature(props) {
+export default function TemperatureMQTT(props) {
   const classes = useStyles();
 
   //MQTT connection
@@ -137,7 +137,5 @@ export default function Temperature(props) {
       </Card>
     </Grid>
   )
-  
-  
 }
 
