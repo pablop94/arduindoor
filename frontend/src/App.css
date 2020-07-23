@@ -55,8 +55,30 @@
 
 .chart {
   height: 50vh;
-  width: 90vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: 90vw; */
+}
 
+.loader {
+  height: 25vh;
+  margin: 130px;
+  align-items: center;
+  justify-content: center;
+  color: #7dc67c;
+}
+
+.section-title {
+  color: #7dc67c;
+  margin-top: 20vh;
+}
+
+.chart-empty-list-text {
+  color: #7dc67c;
+  font-style: italic;
+  text-align: center;
+  font-weight: 300;
 }
 
 a:link {
