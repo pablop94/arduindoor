@@ -46,6 +46,12 @@
 
 }
 
+.App-Light {
+  margin-top: 6vh;
+  margin-bottom: 16vh;
+  color: #7dc67c;
+}
+
 .data-container {
   display: flex;
   flex-direction: row;
