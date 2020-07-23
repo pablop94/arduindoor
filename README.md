@@ -170,5 +170,9 @@ Abrir una terminal en el directorio del frontend y lanzar la app :)
 
 ---
 
-Acá un tutorial completo sobre el armado del proyecto :)
+Acá un tutorial/informe completo sobre el armado del proyecto :)
+
+---
+
+Algunos vectores han sido diseñados by [Vecteezy](https://www.vecteezy.com/free-vector/plants);
 
