@@ -14,14 +14,14 @@ SoftwareSerial Serial1(10, 11);
 
 DHT dht(DHTPIN, DHTTYPE);
 
-char ssid[] = "Coope 2.4GHz";
-char pass[] = "GaiaC00p";
+char ssid[] = "ssid";
+char pass[] = "psswd";
 
 
 //Contador para el envio de datos
 unsigned long lastSend;
 //Nombre o IP del servidor mosquitto
-char server[50] = "192.168.1.12";
+char server[50] = "IPservidorMQTT";
 //Inicializamos el objeto de cliente esp
 WiFiEspClient espClient;
 
@@ -32,6 +32,7 @@ PubSubClient client(espClient);
 
 int status = WL_IDLE_STATUS;
 
+//nombre de los topicos donde publicar mensajes
 #define humedad_topico "humedad"
 #define temperatura_topico "temperatura"
 
