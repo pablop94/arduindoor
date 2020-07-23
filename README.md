@@ -35,7 +35,6 @@ Para ello, recomendamos la utilización de la librería Mosquitto.
 
 ### Conexión con servidor MQTT
 
-
 #### Mediante conexión WiFi
 
 Para conectar el Arduino a la red, se puede utilizar un módulo WiFi ```ESP2866```, y conectar el mismo al servidor broker MQTT.
