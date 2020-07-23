@@ -7,12 +7,11 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import config from "../config";
 
 function TemperatureGraphs() {
-    const humimdity_topic = 'humedad';
-    const temperature_topic = 'temperatura';
-  
-    const apiUrl = "http://localhost:3003/api/temperatures"
+
+    const apiUrl = `${config.server.API_URL}/temperatures`
   
     const [isLoading, setIsLoading] = useState(false);
     const [selectedDate, setSelectedDate] = React.useState(new Date());
@@ -27,23 +26,24 @@ function TemperatureGraphs() {
           date: date
         }
       });
-      topic === humimdity_topic ? setHumidityData(response.data) : setTemperatureData(response.data);
+      topic === config.mqtt.HUMIDITY_TOPIC ? setHumidityData(response.data) : setTemperatureData(response.data);
       setIsLoading(false);
     }
   
     const handleDateChange = (date) => {
       setSelectedDate(date);
-      fetchTemp(humimdity_topic, date);
-      fetchTemp(temperature_topic, date);
+      console.log('qq', config.mqtt.HUMIDITY_TOPIC)
+      fetchTemp(config.mqtt.HUMIDITY_TOPIC, date);
+      fetchTemp(config.mqtt.TEMPERATURE_TOPIC, date);
     };
   
     useEffect(() => {
-      fetchTemp(humimdity_topic);
-      fetchTemp(temperature_topic);
+      fetchTemp(config.mqtt.HUMIDITY_TOPIC);
+      fetchTemp(config.mqtt.TEMPERATURE_TOPIC);
     }, []);
   
     const getTemperaturesList = (topic) => {
-      const list = topic === humimdity_topic ? humidityData : temperatureData;
+      const list = topic === config.mqtt.HUMIDITY_TOPIC ? humidityData : temperatureData;
       let listXYtemperature = list.filter(register => register.topic === topic).map( temp => {
         const date = new Date(temp.createdAt)
         return temp = { "x": date.getHours(), "y": temp.value}
@@ -87,10 +87,10 @@ function TemperatureGraphs() {
                       }}
                     />
                   <div className="chart">
-                    <TemperatureGraph list={getTemperaturesList(temperature_topic)} topic={temperature_topic} />
+                    <TemperatureGraph list={getTemperaturesList(config.mqtt.TEMPERATURE_TOPIC)} topic={config.mqtt.TEMPERATURE_TOPIC} />
                   </div>
                   <div className="chart">
-                    <TemperatureGraph list={getTemperaturesList(humimdity_topic)} topic={humimdity_topic} />
+                    <TemperatureGraph list={getTemperaturesList(config.mqtt.HUMIDITY_TOPIC)} topic={config.mqtt.HUMIDITY_TOPIC} />
                   </div>
                   </MuiPickersUtilsProvider>
                 </div>
