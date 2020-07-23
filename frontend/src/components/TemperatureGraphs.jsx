@@ -12,7 +12,7 @@ function TemperatureGraphs() {
     const humimdity_topic = 'humedad';
     const temperature_topic = 'temperatura';
   
-    const apiUrl = "http://localhost:3000/api/temperatures"
+    const apiUrl = "http://localhost:3003/api/temperatures"
   
     const [isLoading, setIsLoading] = useState(false);
     const [selectedDate, setSelectedDate] = React.useState(new Date());
