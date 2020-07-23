@@ -14,16 +14,17 @@ SoftwareSerial Serial1(10, 11);
 
 DHT dht(DHTPIN, DHTTYPE);
 
-char ssid[] = "ssid";
-char pass[] = "pswd";
+char ssid[] = "Coope 2.4GHz";
+char pass[] = "GaiaC00p";
 
 
 //Contador para el envio de datos
 unsigned long lastSend;
 //Nombre o IP del servidor mosquitto
-char server[50] = "ipMosquito";
+char server[50] = "192.168.1.12";
 //Inicializamos el objeto de cliente esp
 WiFiEspClient espClient;
+
 
 //Iniciamos el objeto subscriptor del cliente 
 //con el objeto del cliente
@@ -61,6 +62,7 @@ void setup()
     
     //Colocamos la referencia del servidor y el puerto
     client.setServer( server, 1883 );
+//    client.setCallback(callback);
     lastSend = 0;
 }
 
@@ -82,25 +84,11 @@ void loop() {
 
     //Creamos un contador para enviar la data cada 2 segundos
     if(millis() - lastSend > 60000 ) {
-        sendDataTopic();
         getAndSendTemperatureAndHumidityData();
         lastSend = millis();
     }
 
     client.loop();
-}
-
-void sendDataTopic()
-{
-    Serial.println("sendDataTopic");
-    // Prepare a JSON payload string
-    String payload = "Enviando datos";
-
-    // Send payload
-    char attributes[100];
-    payload.toCharArray( attributes, 100 );
-    client.publish( "temperatura", attributes );
-    Serial.println( attributes );
 }
 
 void getAndSendTemperatureAndHumidityData()
@@ -152,9 +140,14 @@ void reconnectClient() {
         Serial.println(server);
         //Creamos una nueva cadena de conexión para el servidor
         //e intentamos realizar la conexión nueva
+        //si requiere usuario y contraseña la enviamos connect(clientId, username, password)
         String clientId = "ESP8266Client-" + String(random(0xffff), HEX);
         if(client.connect(clientId.c_str())) {
             Serial.println("[DONE]");
+            
+//            boolean r= client.subscribe("luz");
+//            Serial.println("Subscripto a topico luz");
+//            Serial.println(r);
         } else {
             Serial.print( "[FAILED] [ rc = " );
             Serial.print( client.state() );
