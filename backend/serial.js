@@ -29,6 +29,7 @@ checkAvailable(SERIAL_PORT).then(status => {
       log.info(`MQTT client connected at ${MQTT_CONNECTION}.`)
 
       parser.on('data', data => {
+        console.log('que onda', data)
         //formatear los datos: temperatura,30
         //formatear los datos: humedad,25
         client.publish(...data.split(','))

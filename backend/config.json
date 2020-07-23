@@ -5,6 +5,6 @@
     "logFilePath": "logs/arduindoor.log",
     "timestampFormat": "YYYY-MM-DD HH:mm:ss"
   },
-  "TEMPERATURE_LIMIT": 28,
-  "HUMIDITY_LIMIT": 15
+  "TEMPERATURE_LIMIT": 10,
+  "HUMIDITY_LIMIT": 60
 }
