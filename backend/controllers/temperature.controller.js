@@ -1,5 +1,6 @@
 const db = require("../models");
 const Temperature = db.temperature;
+const moment = require('moment')
 
 // Create and Save a new Temperature    
 exports.create = (req, res) => {
@@ -30,28 +31,40 @@ exports.create = (req, res) => {
       });
   };
 
-  exports.logTemperature = (temperature) => {
-    const newTemperature = new Temperature(temperature)
-    newTemperature
-      .save(newTemperature)    
+exports.logTemperature = (temperature) => {
+  const newTemperature = new Temperature(temperature)
+  newTemperature
+    .save(newTemperature)    
   };
-  
+
+
 
 // Retrieve all Temperatures from the database.
 exports.findAll = (req, res) => {
-    const topic = req.query.topic;
-    const condition =  topic ? { topic: topic } : {};
-    Temperature.find(condition)
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving temperatures."
-        });
+  const date = req.query.date;
+  const yesterday = moment(date).startOf('day').toDate();
+  const tomorrow = moment(yesterday).endOf('day').toDate();
+  
+  console.log('date', date);
+  console.log('yesterday', yesterday)
+  console.log('tomorr', tomorrow)
+  const topic = req.query.topic;
+
+  const condition =  date ? { topic: topic, createdAt: {
+    $gte: yesterday,
+    $lte: tomorrow
+  } } : { topic: topic };
+  Temperature.find(condition)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving temperatures."
       });
-  };
+    });
+};
 
 // Find a single Temperature with an id
 exports.findOne = (req, res) => {
